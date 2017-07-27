@@ -8,7 +8,7 @@
         //整理参数
         this.url = obj.url;
         this.data = obj.data || '';
-        this.method = 'GET' || 'POST';    //请求方式可以为GET也可以为POST
+        this.method = obj.method || 'GET';    //请求方式可以为GET也可以为POST,但是默认为GET
         this.dataType = obj.dataType || (obj.dataType).toUpperCase();   //返回值类型可为XML/json/jsonp三种
         this.async = obj.async || true;   //默认为异步请求
         this.success = obj.success;
@@ -48,9 +48,10 @@
                 for(var param in this.data){
                     arr.push(encodeURIComponent(param) + '=' + encodeURIComponent(this.data[param]));
                 }
-                arr.join('&');
+                arr = arr.join('&');    //将拼接成功的字符串数组继续赋给arr数组
             }
             this.data = arr;
+            // console.log(arr);
         },
         //请求方式为GET/POST时,接收服务器不同的响应
         //XMLHttpRequest 对象有三个重要的属性：
@@ -142,6 +143,6 @@
     window.Ajax = function (data) {
         return new Ajax(data);
     };
-    
+
 })();
 
